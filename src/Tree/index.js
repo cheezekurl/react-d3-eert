@@ -511,7 +511,7 @@ class Tree extends React.Component {
             className={rd3tGClassName}
             transform={`translate(${translate.x},${translate.y}) scale(${scale})`}
           >
-            {links.map(linkData => (
+            {links.reverse().map(linkData => (
               <Link
                 key={uuid.v4()}
                 orientation={orientation}
@@ -525,7 +525,7 @@ class Tree extends React.Component {
               />
             ))}
 
-            {nodes.map(nodeData => (
+            {nodes.reverse().map(nodeData => (
               <Node
                 key={nodeData.id}
                 nodeSvgShape={{ ...nodeSvgShape, ...nodeData.nodeSvgShape }}
