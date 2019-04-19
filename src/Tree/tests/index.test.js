@@ -55,11 +55,11 @@ describe('<Tree />', () => {
     ];
 
     const renderedComponent = mount(<Tree data={mockTree[0]} />);
-    const parentNode = renderedComponent.find(Node).first();
+    const parentNode = renderedComponent.find(Node).last();
     expect(parentNode).not.toBeUndefined();
     expect(parentNode.props().nodeSvgShape).toEqual(svgShapeMock);
 
-    const childNode = renderedComponent.find(Node).last();
+    const childNode = renderedComponent.find(Node).first();
     expect(childNode).not.toBeUndefined();
     expect(childNode.props().nodeSvgShape).not.toEqual(svgShapeMock);
   });
@@ -157,7 +157,7 @@ describe('<Tree />', () => {
       const nodeCount = renderedComponent.find(Node).length;
       renderedComponent
         .find(Node)
-        .first()
+        .last()
         .simulate('click'); // collapse
 
       expect(Tree.collapseNode).toHaveBeenCalledTimes(nodeCount);
@@ -169,7 +169,7 @@ describe('<Tree />', () => {
       const nodeCount = renderedComponent.find(Node).length;
       renderedComponent
         .find(Node)
-        .first()
+        .last()
         .simulate('click'); // collapse
 
       jest.runAllTimers();
@@ -198,12 +198,12 @@ describe('<Tree />', () => {
       const nodeCount = renderedComponent.find(Node).length;
       renderedComponent
         .find(Node)
-        .first()
+        .last()
         .simulate('click');
 
       renderedComponent
         .find(Node)
-        .first()
+        .last()
         .simulate('click');
 
       expect(Tree.collapseNode).toHaveBeenCalledTimes(nodeCount);
@@ -216,14 +216,14 @@ describe('<Tree />', () => {
       const nodeCount = renderedComponent.find(Node).length;
       renderedComponent
         .find(Node)
-        .first()
+        .last()
         .simulate('click');
 
       jest.runAllTimers();
 
       renderedComponent
         .find(Node)
-        .first()
+        .last()
         .simulate('click');
 
       expect(Tree.collapseNode).toHaveBeenCalledTimes(nodeCount);
