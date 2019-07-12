@@ -813,7 +813,7 @@ describe('<Tree />', () => {
       expect(
         renderedComponent
           .find(Node)
-          .last()
+          .first()
           .prop('textLayout'),
       ).toEqual(expect.objectContaining({ textAnchor: 'middle' }));
     });
