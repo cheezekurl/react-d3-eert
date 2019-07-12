@@ -638,6 +638,19 @@ describe('<Tree />', () => {
           zoom: expect.any(Number),
         });
       });
+      
+  describe('nodeData', () => {
+    it('applies textLayout when nodeData has it specified', () => {
+      const renderedComponent = mount(<Tree data={mockData3} />);
+      expect(
+        renderedComponent
+          .find(Node)
+          .first()
+          .prop('textLayout'),
+      ).toEqual(expect.objectContaining({ textAnchor: 'middle' }));
+    });
+  });
+});
 
       it.skip('does not call `onUpdate` if not a function', () => {
         const onUpdateSpy = jest.fn();
