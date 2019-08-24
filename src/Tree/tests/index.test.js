@@ -255,7 +255,7 @@ describe('<Tree />', () => {
       const renderedComponent = mount(<Tree data={mockData} shouldCollapseNeighborNodes />);
       renderedComponent
         .find(Node)
-        .first()
+        .last()
         .simulate('click'); // collapse
 
       jest.runAllTimers();
