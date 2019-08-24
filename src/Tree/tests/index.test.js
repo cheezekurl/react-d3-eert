@@ -220,9 +220,9 @@ describe('<Tree />', () => {
 
     it('collapses all neighbor nodes of the targetNode if it is about to be expanded', () => {
       const renderedComponent = mount(<Tree data={mockData} shouldCollapseNeighborNodes />);
-      renderedComponent.find(Node).first().find('circle').simulate('click'); // collapse
+      renderedComponent.find(Node).last().find('circle').simulate('click'); // collapse
 
-      renderedComponent.find(Node).first().find('circle').simulate('click'); // re-expand
+      renderedComponent.find(Node).last().find('circle').simulate('click'); // re-expand
 
       expect(Tree.prototype.collapseNeighborNodes).toHaveBeenCalledTimes(1);
     });
@@ -638,48 +638,44 @@ describe('<Tree />', () => {
           zoom: expect.any(Number),
         });
       });
-      
-  describe('nodeData', () => {
-    it('applies textLayout when nodeData has it specified', () => {
-      const renderedComponent = mount(<Tree data={mockData3} />);
-      expect(
-        renderedComponent
-          .find(Node)
-          .first()
-          .prop('textLayout'),
-      ).toEqual(expect.objectContaining({ textAnchor: 'middle' }));
-    });
-  });
-});
 
-      it.skip('does not call `onUpdate` if not a function', () => {
-        const onUpdateSpy = jest.fn();
-
-        document.body.innerHTML += '<div id="reactContainer"></div>';
-        render(
-          <Tree data={mockData} onUpdate scaleExtent={{ min: 0.1, max: 10 }} />,
-          document.querySelector('#reactContainer')
-        );
-        const scrollableComponent = document.querySelector('.rd3t-tree-container > svg');
-        scrollableComponent.dispatchEvent(new Event('wheel'));
-        expect(onUpdateSpy).toHaveBeenCalledTimes(0);
-      });
-
-      it('passes the specified (not default) `zoom` and `translate` when a node is clicked for the 1st time', () => {
-        const onUpdateSpy = jest.fn();
-        const zoom = 0.7;
-        const translate = { x: 10, y: 5 };
-
-        const renderedComponent = mount(
-          <Tree data={mockData} zoom={zoom} translate={translate} onUpdate={onUpdateSpy} />
-        );
-        renderedComponent.find(Node).first().simulate('click');
-
-        expect(onUpdateSpy).toHaveBeenCalledWith({
-          node: expect.any(Object),
-          translate,
-          zoom,
+      describe('nodeData', () => {
+        it('applies textLayout when nodeData has it specified', () => {
+          const renderedComponent = mount(<Tree data={mockData3} />);
+          expect(renderedComponent.find(Node).first().prop('textLayout')).toEqual(
+            expect.objectContaining({ textAnchor: 'middle' })
+          );
         });
+      });
+    });
+
+    it.skip('does not call `onUpdate` if not a function', () => {
+      const onUpdateSpy = jest.fn();
+
+      document.body.innerHTML += '<div id="reactContainer"></div>';
+      render(
+        <Tree data={mockData} onUpdate scaleExtent={{ min: 0.1, max: 10 }} />,
+        document.querySelector('#reactContainer')
+      );
+      const scrollableComponent = document.querySelector('.rd3t-tree-container > svg');
+      scrollableComponent.dispatchEvent(new Event('wheel'));
+      expect(onUpdateSpy).toHaveBeenCalledTimes(0);
+    });
+
+    it('passes the specified (not default) `zoom` and `translate` when a node is clicked for the 1st time', () => {
+      const onUpdateSpy = jest.fn();
+      const zoom = 0.7;
+      const translate = { x: 10, y: 5 };
+
+      const renderedComponent = mount(
+        <Tree data={mockData} zoom={zoom} translate={translate} onUpdate={onUpdateSpy} />
+      );
+      renderedComponent.find(Node).first().simulate('click');
+
+      expect(onUpdateSpy).toHaveBeenCalledWith({
+        node: expect.any(Object),
+        translate,
+        zoom,
       });
     });
   });
