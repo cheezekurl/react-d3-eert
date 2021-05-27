@@ -492,7 +492,7 @@ class Tree extends React.Component<TreeProps, TreeState> {
             className={`rd3t-g ${this.gInstanceRef}`}
             transform={`translate(${translate.x},${translate.y}) scale(${scale})`}
           >
-            {links.map((linkData, i) => {
+            {links.reverse().map((linkData, i) => {
               return (
                 <Link
                   key={'link-' + i}
@@ -509,7 +509,7 @@ class Tree extends React.Component<TreeProps, TreeState> {
               );
             })}
 
-            {nodes.map(({ data, x, y, parent, ...rest }, i) => {
+            {nodes.reverse().map(({ data, x, y, parent, ...rest }, i) => {
               return (
                 <Node
                   key={'node-' + i}
